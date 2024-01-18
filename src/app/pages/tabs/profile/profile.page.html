@@ -1,0 +1,111 @@
+<ion-content [fullscreen]="true">
+  <ion-card class="profile-content ion-no-margin">
+    <div align="center" class="image">
+      <ion-avatar>
+        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg">
+      </ion-avatar>
+    </div>
+
+    <ion-item lines="none" class="profile">
+      <ion-label class="ion-text-center">
+        <ion-text clas="title" style="color: #db6c1e">Thinakaran</ion-text>
+        <p style="margin-top:5px">
+          <ion-text class="subtitle" style="color: #595959;font-weight: 700;">{{ userDetails.wallet | currency:'INR'}}</ion-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <!-- Add Options -->
+  <ion-card class="options ion-margin-horizontal"> 
+      <ion-grid>
+        <ion-row class="ion-margin">
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar id="add-money">
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Add Money</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar>
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Edit</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar>
+                  <ion-icon name="heart-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Favourites</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar>
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Logout</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar>
+                  <ion-icon name="eye-off-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Password</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-label>
+                <ion-avatar>
+                  <ion-icon name="location-outline"></ion-icon>
+                </ion-avatar>
+                <p>
+                  <ion-text>Location</ion-text>
+                </p>
+              </ion-label>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+
+  <!-- Model -->
+  <ion-modal
+  #addMoney
+  trigger = "add-money"
+  cssClass = "inline_modal"
+  [breakpoints]="[0.1,0.5,0.9]"
+  [initialBreakpoint]="0.4"
+  style="--border-radius: 25px;"
+  >
+  <ng-template>
+      <ion-content class="ion-padding"> 
+        <ion-toolbar>
+          <h2 class="ion-text-center title" style="color:#3380c6">Wallet</h2>
+          <ion-item>
+            <ion-label position="stacked">Add Wallet</ion-label>
+            <ion-input placeholder="Enter the amount" [(ngModel)]="model.amount"></ion-input>
+          </ion-item>
+          <div align="end" class="ion-margin-top">
+            <ion-button color="danger" (click)="addWallet()">pay</ion-button>
+          </div>
+        </ion-toolbar>
+      </ion-content>
+  </ng-template>  
+  </ion-modal>
+</ion-content>

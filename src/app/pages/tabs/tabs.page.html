@@ -1,0 +1,26 @@
+<ion-tabs mode="md" #tabs (ionTabsDidChange)="setCurrentTab($event)">
+  <ion-fab vertical="bottom" horizontal="center" *ngIf="showFab"  slot="fixed" translucent="true">
+    <ion-fab-button style="--background: #db6c1e;" routerLink="home">
+      <ion-icon [name]="selectTab == 'home' ? 'home' : 'home-outline'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="category">
+      <ion-icon [name]="selectTab == 'category' ? 'grid' : 'grid-outline'"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="order" class="order">
+      <ion-icon [name]="selectTab == 'order' ? 'fast-food' : 'fast-food-outline'"></ion-icon>
+    </ion-tab-button>
+    <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" 
+        fill="red" fill-rule="evenodd">
+      </path>
+    </svg>
+    <ion-tab-button tab="cart" class="cart">
+      <ion-icon [name]="selectTab == 'cart' ? 'cart' : 'cart-outline'"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="profile">
+      <ion-icon [name]="selectTab == 'profile' ? 'person' : 'person-outline'"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
