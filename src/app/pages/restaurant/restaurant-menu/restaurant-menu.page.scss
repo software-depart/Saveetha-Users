@@ -1,0 +1,71 @@
+
+//card
+.card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 0;
+    height:29vh;
+    img {
+        width: 100%;
+    }
+}
+
+.restaurant-title {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 80%;
+    border-radius: 16px;
+    position: absolute;
+    left: 50%;
+    bottom: -72px;
+    transform: translate(-50%,-50%);
+    h5 {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+}
+
+ion-segment-button {
+    font-size: 12px;
+}
+
+.category {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    img {
+        object-fit: cover;
+    }  
+}
+
+.title {
+    font-size: medium;
+    font-weight: bold;
+    font-size: 14px;
+    color: #575656;
+ }
+
+/* content */
+#content {
+  position: relative;
+  width: 95%;
+  height: 140px;
+  margin-top:56px;
+  border-radius: 20px;
+  border: 1px solid #d7d8da;
+  .image {
+    position: absolute;
+    width: 100px;
+    height:100px;
+    left: 50%;
+    top: -50px;
+    transform: translateX(-50%);
+    border-radius: 20px;
+  }
+  .description {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}

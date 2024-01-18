@@ -1,0 +1,121 @@
+<ion-header mode="md">
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-family: Rubik,sans-serif;">Welcome, <span style="color: #db6c1e">Thinakaran!</span></h2>
+    </ion-label>
+    <ion-avatar slot="end" [routerLink]="['/tabs/profile']">
+      <img  alt="Silhouette of a person's head" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" />
+    </ion-avatar>
+  </ion-item>
+  <ion-searchbar color="light" [(ngModel)]="searchKey" (ionInput)="search($event)" placeholder="Search"
+    (ionClear)="clear()" [debounce]="1000" mode="md"></ion-searchbar>
+  <div class="ion-text-center" *ngIf="results.length==0 && searchKey != '' && spinner">
+    <ion-spinner style="--color:#3380c6"></ion-spinner>
+  </div>
+  <ion-list *ngIf="results.length" style="position:absolute;width:100%">
+    <ion-item *ngFor="let result of results" (click)="clear()"
+      [routerLink]="result.type=='Restaurant' ? ['/restaurant/' + result._id] : result.type == 'Category' ? ['/category/' + result._id] : result.type =='SubCategory' ? ['/subcategory/' + result._id]: ['/items/' + result._id]">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img [defaultImage]="result.image" [lazyLoad]="result.image" />
+      </ion-avatar>
+      <ion-label>
+        <ion-text class="title" style="font-weight: bold;" [innerHTML]="result.name | highlight:searchKey">{{ result.name }}</ion-text><br>
+        <ion-text class="subtitle" style="text-transform: capitalize;">{{ result.type }}</ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>  
+</ion-header>
+<ion-content mode="md">
+  <!-- Banner -->
+  <h2 class="title ion-padding-horizontal">New On The Menu</h2>
+  <swiper-container class="swiper"  [slidesPerView]="1" [loop]="true" *ngIf="!banners.length">
+    <swiper-slide>
+      <ion-thumbnail class="banner">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+    </swiper-slide>
+  </swiper-container>
+  <swiper-container [slidesPerView]="1" [loop]="true" pagination delay="3000" autoplay="true">
+    <swiper-slide *ngFor="let banner of banners">
+      <ion-thumbnail class="banner">
+        <img [defaultImage]="banner.image" [lazyLoad]="banner.image">
+      </ion-thumbnail>
+    </swiper-slide>
+  </swiper-container>
+  <!-- Category -->
+  <ion-grid class="ion-no-padding ">
+    <ion-row class="ion-align-items-baseline ion-padding-horizontal">
+      <ion-col size="6">
+        <h2 class="title">Explore Categories</h2>
+      </ion-col>
+      <ion-col size="6">
+        <h4 class="more ion-text-end" [routerLink]="['/tabs/category']">
+          Show more
+        </h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <swiper-container [slidesPerView]="2.5" *ngIf="!categories.length">
+    <swiper-slide *ngFor="let category of [1,2,3,4]">
+      <div>
+        <ion-thumbnail class="category">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  <swiper-container [slidesPerView]="2.5" [loop]="true" align="center">
+    <swiper-slide *ngFor="let category of categories"  [routerLink]="['/category/' + category._id]">
+      <div>
+        <ion-thumbnail class="category">
+          <img [defaultImage]="category.image" [lazyLoad]="category.image">
+        </ion-thumbnail>
+        <ion-label>{{ category.name }}</ion-label>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  <!--Restaurant-->
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-baseline ion-padding-horizontal">
+      <ion-col size="6">
+        <h2 class="title">All Restaurants</h2>
+      </ion-col>
+      <ion-col size="6">
+        <h4 class="more ion-text-end" [routerLink]="['/restaurant']">
+          Show more
+        </h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12" *ngFor="let restaurant of restaurants">
+          <ion-item lines="full">
+            <ion-thumbnail slot="start" *ngIf="!restaurant.image">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-thumbnail slot="start" [routerLink]="['/restaurant/'+restaurant._id]">
+              <img [defaultImage]="restaurant.image" [lazyLoad]="restaurant.image" alt="">
+            </ion-thumbnail>
+            <ion-label>
+              <h2 class="title">{{ restaurant.name }}</h2>
+              <h3>
+                <span class="subtitle" *ngIf="!restaurant.showFullDescription">{{ restaurant.description | wordSlice: 4 }}...</span>
+                <span class="subtitle" *ngIf="restaurant.showFullDescription">{{ restaurant.description }}</span>
+                <span class="more" style="color:#db6c1e" (click)="restaurant.showFullDescription = !restaurant.showFullDescription;"> {{ restaurant.showFullDescription ? 'Read Less' : 'Read More' }}</span>
+              </h3>
+              <ion-text class="subtitle">
+                <div style="display: flex;"> 
+                  <ion-icon style="color:#db6c1e;margin-right: 2px;" name="star"></ion-icon>
+                  <ion-text>4.6</ion-text>
+                </div>
+                <div>
+                  <ion-icon style="color:#db6c1e" name="heart"></ion-icon>
+                </div>
+               </ion-text>
+              </ion-label>
+          </ion-item>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

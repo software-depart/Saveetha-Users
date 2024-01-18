@@ -1,0 +1,59 @@
+<ion-header mode="md">
+  <ion-item lines="none" style="align-items: start">
+    <ion-icon slot="start" color="dark" name="chevron-back-outline" (click)="goBack()"></ion-icon>
+    <h2 class="title" style="text-align: center;">Restaurants</h2>
+  </ion-item>
+</ion-header>
+<ion-content mode="md">
+  <ion-grid class="ion-padding-top">
+    <ion-row>
+      <ion-col size="12" *ngFor="let restaurant of restaurants">
+          <ion-item lines="full">
+            <ion-thumbnail slot="start" *ngIf="!restaurant.image">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-thumbnail slot="start" [routerLink]="['/restaurant/1']">
+              <img  [defaultImage]="restaurant.image" [lazyLoad]="restaurant.image" alt="">
+            </ion-thumbnail>
+            <ion-label>
+              <h2 class="title">{{ restaurant.name }}</h2>
+              <h3>
+                <span *ngIf="!restaurant.showFullDescription">{{ restaurant.description | wordSlice: 8 }}...</span>
+                <span *ngIf="restaurant.showFullDescription">{{ restaurant.description }}</span>
+                <span  style="color:#3380c6" (click)="restaurant.showFullDescription = !restaurant.showFullDescription;"> {{ restaurant.showFullDescription ? 'Read Less' : 'Read More' }}</span>
+              </h3>
+              <ion-text class="subtitle">
+                <div style="display: flex;"> 
+                  <ion-icon style="color:gold;margin-right: 2px;" name="star"></ion-icon>
+                  <ion-text>4.6</ion-text>
+                </div>
+                <div>
+                  <ion-icon style="color:red" name="heart"></ion-icon>
+                </div>
+               </ion-text>
+              </ion-label>
+          </ion-item>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12" *ngFor="let restaurant of restaurants">
+        <ion-card class="card" [routerLink]="['/restaurant/1']">
+          <img width="100%" style="height:26vh" [src]="restaurant.image" alt="">
+          <ion-card-header>
+            <ion-card-subtitle class="title">{{ restaurant.name }}</ion-card-subtitle>
+            <ion-text>Western cuisine Fast Food,Burger</ion-text>
+            <ion-text>
+              <ion-icon style="color:gold;margin-top:.4rem;margin-right:2px" name="star"></ion-icon>
+              <ion-icon style="color:gold;margin-top:.4rem;margin-right:2px" name="star"></ion-icon>
+              <ion-icon style="color:gold;margin-top:.4rem;margin-right:2px" name="star"></ion-icon>
+              <ion-icon style="color:gold;margin-top:.4rem;margin-right:2px" name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+            </ion-text>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header mode="md">
+  <ion-item lines="none" style="align-items: start">
+    <h2 class="title" style="color:#286AA5">Categories</h2>
+    <ion-icon slot="start" color="dark" name="chevron-back-outline" (click)="goBack()"></ion-icon>
+  </ion-item>
+</ion-header>
+<ion-content mode="md">
+    <ion-grid>
+        <ion-row>
+          <!-- <ion-col size="6" size-md="4" size-lg="4" align="center"  *ngFor="let category of [1,2,3,4]">
+            <ion-thumbnail class="category" style="box-shadow: none;" *ngIf="!categories.length">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+           </ion-col>
+          <ion-col [routerLink]="['/category/1']" align="center" size="6" size-md="4" size-lg="4" *ngFor="let category of categories">
+              <ion-thumbnail class="category" style="box-shadow: none;">
+                <img  [defaultImage]="category.image" [lazyLoad]="category.image">
+              </ion-thumbnail>
+              <ion-label>{{ category.name }}</ion-label>
+          </ion-col> -->
+          <ion-col class="ion-margin-top"  size="6" size-md="4" size-lg="4" *ngFor="let category of categories">
+            <ion-card style="padding:2px;margin:0px">
+              <ion-thumbnail [routerLink]="['/category/'+category._id]" class="category" style="box-shadow: none;margin-top:8px">
+                <img  [src]="category.image">
+              </ion-thumbnail>
+              <ion-card-content>
+                <h2 class="title">{{ category.name }}</h2>
+                <h2 class="subtitle">+ Packaging free</h2>
+              </ion-card-content>
+              <ion-icon class="heart-icon" src="assets/heart.svg"> </ion-icon>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

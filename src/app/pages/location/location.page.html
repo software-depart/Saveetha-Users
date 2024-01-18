@@ -1,0 +1,41 @@
+<ion-content mode="md">
+  <ion-grid>
+      <ion-row>
+        <ion-col size="12"> 
+          <ion-avatar style="margin:auto">
+            <img alt="Silhouette of a person's head" src="assets/location/circle.png" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <h2>Select <span style="color: #FF642F">Location</span></h2>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-img  class="line-img" src="assets/location/line.svg"></ion-img>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <p>Please enter your location or allow access to <br> your location to ﬁnd restaurants near you.</p>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-list>
+            <ion-item [ngStyle]="{'box-shadow': toggle ? '0px 24px 0px #FF642F' : 'none'}" lines="none" class="custom-select" (click)="toggle = !toggle;">
+              <ion-img src="assets/location/locationButton.svg" slot="start"></ion-img>
+              <ion-select interface="popover"  [placeholder]="selection || 'Select your location'">
+                <ion-select-option value="City Campus">City Campus</ion-select-option>
+                <ion-select-option value="Thandalam Campus">Thandalam Campus</ion-select-option>
+              </ion-select>
+              <ion-icon name="chevron-up-outline" *ngIf="!toggle" slot="end" class="arrow-icon"></ion-icon>
+              <ion-icon name="chevron-down-outline" *ngIf="toggle" slot="end" class="arrow-icon"></ion-icon>
+            </ion-item>
+          </ion-list>
+          <ion-list class="custom-select-dropdown" *ngIf="toggle">
+            <ion-item  lines="none" class="ion-text-center selection" [class.selection]="(selection=='City Campus') || (selection == '')" *ngIf="toggle" button (click)="selection='City Campus';toggle=!toggle;setLocation()">
+              <ion-label>City Campus</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-text-center" button [class.selection]="selection=='Thandalam Campus'" (click)="selection='Thandalam Campus';toggle=!toggle;setLocation()">
+              <ion-label>Thandalam Campus</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

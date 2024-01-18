@@ -1,0 +1,42 @@
+ion-grid {
+    max-width: 31.25rem;
+    margin: 1rem auto
+}
+
+ion-content ion-toolbar {
+    position: relative;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+ion-button {
+    --background: #FFFFFF;
+    --color: #393A3A;
+    --border-radius: 1.5rem;
+    margin: auto;
+    width: 16.875rem;
+    border: 1px solid #393A3A;
+    &:active,&:hover {
+        --background: linear-gradient(0deg, #FF642F -8.93%, #FF642F 82.46%);
+    }
+}
+
+.restaurant-img {
+    margin: auto;
+    background: #FFECE6;
+    width: 130px;
+    margin:auto;
+    border-radius: 50%;
+}
+
+.line-img {
+    width:11.25rem;
+    margin:auto
+}
+
+// ion-button {
+//     color: #FFFFFF;
+//     border-radius: 1.5rem; //24px
+//     --background: linear-gradient(0deg,  #FF642F -8.93%, #FF9F2F 82.46%);
+//     --box-shadow: none;
+// }

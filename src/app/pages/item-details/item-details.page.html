@@ -1,0 +1,58 @@
+<ion-header mode="md">
+  <ion-item lines="none"  style="align-items: start">
+    <ion-icon slot="start" color="dark" name="chevron-back-outline" (click)="goBack()"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button style="width:auto" routerLink="/tabs/cart">
+        <ion-badge color="danger">{{ carts.length }}</ion-badge>
+        <ion-icon slot="icon-only" name="cart">&#9679;</ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-header>
+<ion-content mode="md">
+   <ion-grid>
+      <ion-row>
+        <ion-col size="12" align="center">
+          <img width="80%" height="80%" [defaultImage]="itemDetails.image" [lazyLoad]="itemDetails.image">
+        </ion-col>
+        <ion-col size="12">
+          <h4 class="title">{{ itemDetails.name }}</h4>
+          <p class="subtitle">{{ itemDetails.description}}</p>
+        </ion-col>
+        <ion-col size="12">
+          <div style="display: flex;justify-content: space-between;">
+            <h2 class="title">Suggestion</h2>
+            <h4 class="more ion-text-end" [routerLink]="['/tabs/category']">
+              Show more
+            </h4>
+          </div>
+          <swiper-container [slidesPerView]="2.5" [loop]="true" align="center"> 
+            <swiper-slide *ngFor="let category of categories">
+                <ion-thumbnail class="category" [routerLink]="['/category/'+category._id]">
+                  <img [defaultImage]="category.image" [lazyLoad]="category.image">
+                </ion-thumbnail>
+                <ion-label>{{ category.name }}</ion-label>
+            </swiper-slide>
+          </swiper-container>
+        </ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>
+<ion-footer mode="md">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-baseline ion-padding-horizontal" style="padding-top:.5rem;padding-bottom:.5rem;">
+      <ion-col size="6">
+        <div>
+          <ion-label class="title">Actual Price</ion-label><br>
+          <ion-text class="subtitle">{{ itemDetails.amount| currency:'INR' }}</ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="6" align="end">
+        <ion-button color="primary" (click)="addToCart()">
+          <ion-icon name="cart-outline" style="margin-right: 7px"></ion-icon>
+          <ion-text>Add to Cart</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

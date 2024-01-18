@@ -1,0 +1,137 @@
+<ion-header mode="md" *ngIf="!scanActive">
+  <ion-item lines="none">
+    <h2 class="title">List Of Order</h2>
+  </ion-item>
+</ion-header>
+<ion-content mode="md" [style.--background]="scanActive ? '#00000000':'#fff'">
+  <ion-list class="list-items" *ngIf="!scanActive">
+    <ion-card *ngFor="let order of orders">
+      <div class="ion-margin-horizontal" style="display: flex;justify-content: space-between;"> 
+        <h2 class="subtitle">ID: 6231</h2>
+        <h2 class="subtitle" style="font-weight: bold;">{{ order?.itemID[0]?.restaurantId[0].name }}</h2>
+      </div>
+      <ion-card style="box-shadow: none;">
+        <ion-item lines="full" style="border-bottom: 1px solid #989aa2;">
+          <ion-thumbnail aria-hidden="true" slot="start">
+            <img width="100%" height="100%" alt="" [defaultImage]="order?.itemID[0].image" [lazyLoad]="order?.itemID[0].image" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2 class="title" style="margin-top:0;margin-bottom:0">{{ order?.itemID[0].name }}</h2>
+            <h2 class="subtitle" style="margin-top:4px">
+              <span style="padding-right:6px;border-right: 1px solid black">Qty: 1 {{ order?.itemID[0].unit }}</span>
+              <span style="padding-left:6px;">Nos: {{ order?.itemID[0].quantity }}</span><br>
+            </h2>
+            <h2 class="title"> {{ order?.itemID[0]?.amount | currency: 'INR' }}</h2>
+          </ion-label>
+          <ion-note slot="end" style="margin:0;padding:0" class="subtitle">
+            <ion-button style="--background:#008000a3;" (click)="startScan(order?._id)">Scan</ion-button>
+          </ion-note>
+        </ion-item>
+      </ion-card>
+      <state-stepper size="small">
+        <state-stepper-step state="success">
+          <ion-icon name="cart-outline" slot="icon"></ion-icon>
+          <span slot="text">Paid</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="document-text-outline" slot="icon"></ion-icon>
+          <span slot="text">Confirm</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="fast-food-outline" slot="icon"></ion-icon>
+          <span slot="text">Delivery</span>
+        </state-stepper-step>
+        <state-stepper-step [attr.state]="order.status =='Delivered' ? 'success' : null">
+          <ion-icon name="checkmark" slot="icon"></ion-icon>
+          <span slot="text">Done</span>
+        </state-stepper-step>
+      </state-stepper>
+    </ion-card>
+    <!-- <ion-card>
+      <div class="ion-margin-horizontal" style="display: flex;justify-content: space-between;"> 
+        <h2 class="subtitle">ID: 256788</h2>
+        <h2 class="subtitle" style="font-weight: bold;">A2B</h2>
+      </div>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail aria-hidden="true" slot="start">
+            <img width="100%" height="100%" alt="" src="https://thumbs.dreamstime.com/b/delicious-indian-dosa-potato-filling-chutney-bowl-white-background-generative-ai-280540183.jpg" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2 class="title" style="margin-top:0;margin-bottom:0">Dosa + Potato</h2>
+            <h2 class="subtitle" style="margin-top:4px">
+              <span style="padding-right:6px;border-right: 1px solid black">Qty: 200 kg</span>
+              <span style="padding-left:6px;">Nos: 1</span><br>
+            </h2>
+            <h2 class="title"> {{ '100' | currency: 'INR' }}</h2>
+          </ion-label>
+          <ion-note slot="end" style="margin:0;padding:0" class="subtitle">
+            <ion-button style="--background:#008000a3;">Scan</ion-button>
+          </ion-note>
+        </ion-item>
+      </ion-card>
+      <state-stepper size="small">
+        <state-stepper-step state="success">
+          <ion-icon name="cart-outline" slot="icon"></ion-icon>
+          <span slot="text">Paid</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="document-text-outline" slot="icon"></ion-icon>
+          <span slot="text">Confirm</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="fast-food-outline" slot="icon"></ion-icon>
+          <span slot="text">Delivery</span>
+        </state-stepper-step>
+        <state-stepper-step>
+          <ion-icon name="checkmark" slot="icon"></ion-icon>
+          <span slot="text">Done</span>
+        </state-stepper-step>
+      </state-stepper>
+    </ion-card>
+    <ion-card>
+      <div class="ion-margin-horizontal" style="display: flex;justify-content: space-between;"> 
+        <h2 class="subtitle">ID: 256788</h2>
+        <h2 class="subtitle" style="font-weight: bold;">Yaa Mohadieen</h2>
+      </div>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail aria-hidden="true" slot="start">
+            <img width="100%" height="100%" alt="" src="https://png.pngtree.com/png-clipart/20231013/original/pngtree-charming-chicken-biryani-with-lag-pice-an-adorable-presentation-of-flavorful-png-image_13295956.png" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2 class="title" style="margin-top:0;margin-bottom:0">Chicken Biryani</h2>
+            <h2 class="subtitle" style="margin-top:4px">
+              <span style="padding-right:6px;border-right: 1px solid black">Qty: 200 kg</span>
+              <span style="padding-left:6px;">Nos: 1</span><br>
+            </h2>
+            <h2 class="title"> {{ '100' | currency: 'INR' }}</h2>
+          </ion-label>
+          <ion-note slot="end" style="margin:0;padding:0" class="subtitle">
+            <ion-button style="--background:#008000a3;">Scan</ion-button>
+          </ion-note>
+        </ion-item>
+      </ion-card>
+      <state-stepper size="small">
+        <state-stepper-step state="success">
+          <ion-icon name="cart-outline" slot="icon"></ion-icon>
+          <span slot="text">Paid</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="document-text-outline" slot="icon"></ion-icon>
+          <span slot="text">Confirm</span>
+        </state-stepper-step>
+        <state-stepper-step state="success">
+          <ion-icon name="fast-food-outline" slot="icon"></ion-icon>
+          <span slot="text">Delivery</span>
+        </state-stepper-step>
+        <state-stepper-step>
+          <ion-icon name="checkmark" slot="icon"></ion-icon>
+          <span slot="text">Done</span>
+        </state-stepper-step>
+      </state-stepper>
+    </ion-card> -->
+  </ion-list>
+  <div class="scan-box" *ngIf="scanActive"></div>
+
+</ion-content>

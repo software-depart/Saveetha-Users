@@ -1,0 +1,51 @@
+<ion-content mode="md">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="card">
+          <img [lazyLoad]="restaurant.image" alt="">
+        </ion-card>
+        <ion-card class="ion-padding restaurant-title" style="padding: 8px" align="center">
+            <h5 class="ion-no-margin" style="padding: 8px">{{ restaurant.name }}</h5>
+            <ion-text>{{ restaurant.description }}</ion-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-segment [scrollable]="true" style="margin-top:35px" value="north india">
+    <ion-segment-button value="north india">
+      <ion-label>North India</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="south india">
+      <ion-label>South India</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="chinease">
+      <ion-label>Chinease</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="ice cream">
+      <ion-label>Ice cream</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12" *ngFor="let subcategory of categories[0]?.subcategories">
+        <h6 class="title">{{ subcategory.name }}</h6>
+        <swiper-container [slidesPerView]="2.2" align="center" [loop]="true"> 
+          <swiper-slide  *ngFor="let item of subcategory?.items">
+            <div class="ion-margin-top" id="content"  [routerLink]="['/items/'+ item._id]">
+              <div class="image">
+                <img width="100%" height="100%" [src]="item.image">
+              </div>
+              <div class="description">
+                <div class="ion-margin-vertical">
+                  <h2 class="title">{{ item.name }}</h2>
+                  <ion-button color="danger">{{ item.amount | currency: 'INR' }}</ion-button>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

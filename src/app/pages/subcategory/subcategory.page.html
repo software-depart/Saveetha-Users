@@ -1,0 +1,35 @@
+<ion-header mode="md">
+  <ion-item lines="none" style="align-items: start">
+    <h2 class="title" style="color:#286AA5">Sub Categories</h2>
+    <ion-icon slot="start" color="dark" name="chevron-back-outline" (click)="goBack()"></ion-icon>
+  </ion-item>
+</ion-header>
+<ion-content mode="md">
+  <ion-grid>
+      <ion-row>
+        <!-- <ion-col size="6" size-md="4" size-lg="4" align="center"  *ngFor="let subCategory of [1,2,3,4]">
+          <ion-thumbnail class="category" style="box-shadow: none;" *ngIf="!subCategories.length">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+         </ion-col> -->
+        <!-- <ion-col align="center" size="6" size-md="4" size-lg="4" *ngFor="let subCategory of subCategories">
+          <ion-thumbnail [routerLink]="['/subcategory/'+subCategory._id]" class="category" style="box-shadow: none;">
+            <img  [src]="subCategory.image">
+          </ion-thumbnail>
+          <ion-label>{{ subCategory.name }}</ion-label>
+       </ion-col>   -->
+        <ion-col class="ion-margin-top"  size="6" size-md="4" size-lg="4" *ngFor="let subCategory of subCategories">
+          <ion-card style="padding:2px;margin:0px">
+            <ion-thumbnail [routerLink]="['/subcategory/'+subCategory._id]" class="category" style="box-shadow: none;margin-top:8px">
+              <img  [src]="subCategory.image">
+            </ion-thumbnail>
+            <ion-card-content>
+              <h2 class="title">{{ subCategory.name }}</h2>
+              <h2 class="subtitle">+ Packaging free</h2>
+            </ion-card-content>
+            <ion-icon class="heart-icon" src="assets/heart.svg"> </ion-icon>
+          </ion-card>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
+</ion-content>

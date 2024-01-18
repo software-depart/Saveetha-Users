@@ -1,0 +1,43 @@
+<ion-header mode="md">
+  <ion-item lines="none" style="align-items: start">
+    <ion-icon slot="start" color="dark" name="chevron-back-outline" (click)="goBack()"></ion-icon>
+    <h2 class="title" style="text-align: center;">Cart</h2>
+  </ion-item>
+</ion-header>
+<ion-content mode="md">
+  <ion-list class="list-items">
+      <ion-card *ngFor="let cart of carts">
+      <ion-item-sliding>
+        <ion-item lines="none">
+          <ion-thumbnail aria-hidden="true" slot="start">
+            <img alt="Silhouette of mountains" [defaultImage]="cart.itemID.image" [lazyLoad]="cart.itemID.image" />          </ion-thumbnail>
+          <ion-label>
+            <h2 class="title" style="margin-top:0;margin-bottom:0">{{ cart.itemID.name }}</h2>
+            <h2 class="subtitle" style="margin-top:4px">
+              <span style="padding-right:6px;border-right: 1px solid black">Qty: 1 {{ cart.itemID.unit }}</span>
+              <span style="padding-left:6px;">Nos: {{ cart.itemID.quantity }}</span>
+            </h2>
+            <h2 class="title"> {{ cart.itemID.amount | currency: 'INR' }}</h2>
+          </ion-label>
+          <ion-note slot="end" class="subtitle">
+            <div class="title"> 
+              <ion-icon name="remove-outline"></ion-icon>
+              <ion-text>1</ion-text>
+              <ion-icon name="add-outline"></ion-icon>
+            </div>
+          </ion-note>
+        </ion-item>
+        <ion-item-options (click)="delete(cart._id)">
+          <ion-item-option color="danger">Delete</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      </ion-card>
+      <ion-item lines="full" *ngIf="carts.length != 0">
+        <ion-label slot="start" class="title">Total Price</ion-label>
+        <ion-label class="title" slot="end">{{ totalAmount | currency: 'INR' }}</ion-label>
+      </ion-item>
+      <h4 align="center" *ngIf="carts.length != 0">
+        <ion-button color="primary" (click)="checkout()" [disabled]="!carts.length" >Checkout</ion-button>
+      </h4>
+  </ion-list>
+</ion-content>
